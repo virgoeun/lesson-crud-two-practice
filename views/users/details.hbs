@@ -1,1 +1,11 @@
 <h2>User's posts</h2>
+<ul>
+{{#each posts}}
+<li>
+
+{{this.title}} by {{this.username}}
+</li>
+
+{{/each}}
+
+</ul>

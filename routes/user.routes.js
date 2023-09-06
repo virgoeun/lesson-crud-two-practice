@@ -8,6 +8,7 @@ const User = require("../models/User.model");
 
 router.get("/user-create", (req, res) => res.render("users/create"));
 
+
 // ****************************************************************************************
 // POST route to submit the form to create a user
 // ****************************************************************************************
@@ -42,6 +43,17 @@ router.get("/users", (req, res) => {
 // GET details of a specific user (primarily their posts)
 // ****************************************************************************************
 
-// ... your code here
+
+router.get('/users/:userId/posts', (req, res)=> {
+  const {userId} = req.params
+  
+  User.findById(userId)
+  .populate('posts')
+  .then (foundUser => {
+
+    res.render('users/details', {posts: foundUser.posts})
+  })
+  .catch((err) => console.log(`Error while getting users from the DB: ${err}`))
+  })
 
 module.exports = router;
